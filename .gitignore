@@ -1,0 +1,16 @@
+# Dependencias de Angular
+**/node_modules/
+**/.angular/
+**/dist/
+
+# Archivos compilados de Java
+**/target/
+
+# Configuraciones privadas
+**/.env
+**/.env.*
+!**/.env.example
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
