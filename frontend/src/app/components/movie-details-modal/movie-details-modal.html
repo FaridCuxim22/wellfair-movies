@@ -4,6 +4,7 @@
   tabindex="-1"
   aria-labelledby="movieDetailsTitle"
   aria-hidden="true"
+  (hide.bs.modal)="onModalHide()"
 >
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -41,11 +42,11 @@
                   [alt]="'Póster de ' + details.title"
                 />
               } @else {
-                <div
-                  class="details-poster bg-secondary-subtle d-flex align-items-center justify-content-center"
-                >
-                  Sin póster
-                </div>
+                <img
+                  class="details-poster"
+                  [src]="'/images/no-poster.webp'"
+                  [alt]="'Póster no disponible para ' + details.title"
+                />
               }
             </div>
 
@@ -63,7 +64,7 @@
                     {{ genre.name }}
                   </span>
                 } @empty {
-                  <span>No disponibles</span>
+                  <span>No hay géneros disponibles</span>
                 }
               </div>
 

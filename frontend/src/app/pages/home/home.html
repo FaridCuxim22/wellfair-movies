@@ -57,7 +57,8 @@
           <!-- [movie] hace referencia a la entrada declarada en app-movie-card
               ="movie" hace referencia a la variable local del for -->
           <app-movie-card [movie]="movie" (detailsRequested)="openMovieDetails($event)" />
-          <!-- $event contiene el id enviado por el card -->
+          <!-- Cuando el MovieCard emita el evento detailsRequested, 
+           ejecuta el método openMovieDetails(), $event contiene el id enviado por el card -->
         </div>
       } @empty {
         <p>No hay películas disponibles.</p>

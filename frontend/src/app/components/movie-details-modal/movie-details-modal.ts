@@ -13,4 +13,13 @@ export class MovieDetailsModal {
   readonly movie = input<MovieDetails | null>(null);
   readonly loading = input(false);
   readonly error = input<string | null>(null);
+
+  onModalHide(): void {
+    const activeElement = document.activeElement; //Devuelve el elemento que tiene el foco actual
+
+    //Permite comprobar si el elemento está dentro del modal
+    if (activeElement instanceof HTMLElement && activeElement.closest('#movieDetailsModal')) {
+      activeElement.blur(); //Eliminar el foco del elemento
+    }
+  }
 }

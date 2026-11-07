@@ -28,7 +28,11 @@ public class TmdbService {
     //Método para las películas populares
     public String getPopularMovies (){
         String result = restClient.get() //Petición HTTP GET
-            .uri("/movie/popular") //Recurso a consultar
+            .uri(uriBuilder -> uriBuilder
+                .path("/movie/popular") //Recurso a consultar
+                .queryParam("language", "es-MX")
+                .build()
+            )
             .retrieve() //Ejecutar la solicitud
             .body(String.class); 
 
@@ -55,6 +59,7 @@ public class TmdbService {
         String result = restClient.get()
             .uri(uriBuilder -> uriBuilder
                 .path("/movie/{movie_id}")
+                .queryParam("language", "es-MX")
                 .build(id) //Argumentos para la variable de ruta
             )
             .retrieve()

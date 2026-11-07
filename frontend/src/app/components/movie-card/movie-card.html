@@ -9,9 +9,12 @@
     />
     <!-- loading="lazy" pospone la descargar hasta que esté cerca de la parte visible de la pantalla -->
   } @else {
-    <div class="movie-poster bg-secondary-subtle d-flex align-items-center justify-content-center">
-      Sin póster
-    </div>
+    <img
+      class="card-img-top movie-poster"
+      [src]="'/images/no-poster.webp'"
+      [alt]="'Póster no disponible para ' + movie().title"
+      loading="lazy"
+    />
   }
 
   <div class="card-body d-flex flex-column">
