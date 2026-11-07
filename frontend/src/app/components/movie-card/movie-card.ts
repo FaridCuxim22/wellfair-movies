@@ -15,6 +15,13 @@ export class MovieCard {
   //Output para enviar el id de la película seleccionada
   readonly detailsRequested = output<number>();
 
+  readonly isFavorite = input(false); //El componente padre indica si la película está guardada
+  readonly favoriteToggled = output<Movie>(); //El componente hijo indica que el user quiere cambiar ese estado
+
+  toggleFavorite(): void {
+    this.favoriteToggled.emit(this.movie());
+  }
+
   showDetails(): void {
     this.detailsRequested.emit(this.movie().id);
   }

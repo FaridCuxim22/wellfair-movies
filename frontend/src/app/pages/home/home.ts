@@ -1,7 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 
 import { Movie, MovieDetails } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
+import { FavoritesService } from '../../services/favorites.service';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { MovieDetailsModal } from '../../components/movie-details-modal/movie-details-modal';
 
@@ -31,6 +32,28 @@ export class Home implements OnInit {
   readonly detailsLoading = signal(false);
   readonly detailsError = signal<string | null>(null);
 
+  private readonly favoritesService = inject(FavoritesService);
+  readonly showFavorites = signal(false);
+
+  //Computed crea un valor derivado de otro signal
+  readonly displayedMovies = computed(() =>
+    this.showFavorites()
+      ? this.favoritesService.favorites() //Contiene las películas favoritas guardadas
+      : this.movies(),
+  );
+
+  isFavorite(id: number): boolean {
+    return this.favoritesService.isFavorite(id);
+  }
+
+  toggleFavorite(movie: Movie): void {
+    this.favoritesService.toggleFavorite(movie);
+  }
+
+  showFavoriteMovies(): void {
+    this.showFavorites.set(true);
+  }
+
   //Método invocado durante la inicialización del componente (Carga inicial de la página)
   ngOnInit(): void {
     this.loadPopularMovies();
@@ -38,6 +61,7 @@ export class Home implements OnInit {
 
   //Carga las películas populares
   loadPopularMovies(): void {
+    this.showFavorites.set(false);
     this.loading.set(true);
     this.error.set(null);
     this.hasSearched.set(false);
@@ -59,6 +83,7 @@ export class Home implements OnInit {
   //Busca las películas por título
   searchMovies(event: Event, query: string): void {
     event.preventDefault(); //Evita que el form realice su comportamiento tradicional
+    this.showFavorites.set(false);
     const title = query.trim();
 
     if (!title) {

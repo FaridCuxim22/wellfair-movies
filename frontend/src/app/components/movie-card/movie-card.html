@@ -38,5 +38,15 @@
     >
       Ver detalles
     </button>
+
+    <!-- [attr.aria-pressed] indica si este topggle botón está activado -->
+    <button
+      type="button"
+      class="btn btn-outline-danger mt-2"
+      [attr.aria-pressed]="isFavorite()"
+      (click)="toggleFavorite()"
+    >
+      {{ isFavorite() ? '♥ Quitar de favoritos' : '♡ Agregar a favoritos' }}
+    </button>
   </div>
 </article>
