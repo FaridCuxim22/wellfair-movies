@@ -1,0 +1,11 @@
+/*:host representa el elemento HTML que contiene el componente*/
+:host {
+  display: block;
+  height: 100%;
+}
+
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
